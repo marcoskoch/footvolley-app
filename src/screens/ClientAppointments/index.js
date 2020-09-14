@@ -8,12 +8,12 @@ import Appointment from '~/components/Appointment';
 import { Container, List } from './styles';
 import colors from '~/styles/colors';
 
-const ProviderAppointments = () => {
+const ClientAppointments = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [appointments, setAppointments] = useState([]);
 
   const loadAppointments = async () => {
-    const response = await api.get('appointments?status=3');
+    const response = await api.get('appointments/list?status=3');
 
     setAppointments(response.data);
   };
@@ -49,4 +49,4 @@ const ProviderAppointments = () => {
   );
 };
 
-export default ProviderAppointments;
+export default ClientAppointments;

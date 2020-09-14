@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { parseISO, formatRelative } from 'date-fns';
 import pt from 'date-fns/locale/pt';
+import { useAuth } from '~/contexts/auth';
 
 import {
   Container,
@@ -12,6 +13,7 @@ import {
 } from './styles';
 
 const Appointment = ({ data }) => {
+  const { user } = useAuth();
   const dateParsed = useMemo(() => {
     return formatRelative(parseISO(data.date), new Date(), {
       locale: pt,
@@ -19,17 +21,23 @@ const Appointment = ({ data }) => {
     });
   }, [data.date]);
 
+  const avatarUri = user.provider
+    ? data?.user?.avatar?.url
+    : data?.court?.provider?.avatar?.url;
+
   return (
     <Container key={data.id}>
       <Avatar
         source={{
-          uri: data.user.avatar
-            ? data.user.avatar.url
-            : `https://api.adorable.io/avatar/50/${data.user.name}.png`,
+          uri:
+            avatarUri ||
+            `https://api.adorable.io/avatar/50/${data.user.name}.png`,
         }}
       />
       <AppointmentDetail>
-        <UserName>{data.user.name}</UserName>
+        <UserName>
+          {user.provider ? data.user.name : data.court.provider.name}
+        </UserName>
         <Court>{data.court.name}</Court>
         <AppointmentDate>{dateParsed}</AppointmentDate>
       </AppointmentDetail>

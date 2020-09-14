@@ -16,7 +16,7 @@ import {
 
 const menus = [
   { id: 1, menu: 'Perfil', icon: 'account-edit', screen: 'Profile' },
-  { id: 2, menu: 'Endereço', icon: 'map-marker', screen: 'Adress' },
+  { id: 2, menu: 'Endereço', icon: 'map-marker', screen: 'Address' },
   { id: 3, menu: 'Cadastrar quadra', icon: 'plus-circle', screen: 'Court' },
 ];
 
@@ -39,7 +39,7 @@ const Settings = ({ navigation }) => {
               <ItemContainer
                 key={item.id}
                 onPress={() =>
-                  navigation.navigate('Setting', { screen: 'Profile' })
+                  navigation.navigate('Setting', { screen: item.screen })
                 }
               >
                 <MaterialCommunityIcons
