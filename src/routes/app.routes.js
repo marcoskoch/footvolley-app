@@ -13,8 +13,12 @@ import SettingsScreen from '~/screens/Settings';
 import ProfileScreen from '~/screens/Profile';
 import AddressScreen from '~/screens/Settings/Address';
 import SelectProviderScreen from '~/screens/New/SelectProvider';
+import SelectCourtScreen from '~/screens/New/SelectCourt';
+import SelectDateTimeScreen from '~/screens/New/SelectDateTime';
 
 const Stack = createStackNavigator();
+const SettingStack = createStackNavigator();
+const NewStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const icons = {
@@ -85,7 +89,7 @@ const AppTabs = ({ provider }) => {
 
   const NewScreen = ({ navigation }) => {
     return (
-      <Stack.Navigator
+      <NewStack.Navigator
         screenOptions={{
           headerStyle: { backgroundColor: colors.MATTE_BLACK },
           headerTitleStyle: {
@@ -93,7 +97,7 @@ const AppTabs = ({ provider }) => {
           },
         }}
       >
-        <Stack.Screen
+        <NewStack.Screen
           name="SelectProvider"
           component={SelectProviderScreen}
           options={{
@@ -113,7 +117,47 @@ const AppTabs = ({ provider }) => {
             ),
           }}
         />
-      </Stack.Navigator>
+        <NewStack.Screen
+          name="CourtProvider"
+          component={SelectCourtScreen}
+          options={{
+            title: 'Selecione a Quadra',
+            headerLeft: () => (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.popToTop();
+                }}
+              >
+                <MaterialIcons
+                  name="chevron-left"
+                  size={24}
+                  color={colors.WHITE}
+                />
+              </TouchableOpacity>
+            ),
+          }}
+        />
+        <NewStack.Screen
+          name="SelectDateTime"
+          component={SelectDateTimeScreen}
+          options={{
+            title: 'Selecione a Data',
+            headerLeft: () => (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.popToTop();
+                }}
+              >
+                <MaterialIcons
+                  name="chevron-left"
+                  size={24}
+                  color={colors.WHITE}
+                />
+              </TouchableOpacity>
+            ),
+          }}
+        />
+      </NewStack.Navigator>
     );
   };
 
@@ -162,7 +206,7 @@ const AppTabs = ({ provider }) => {
 
   const Setting = ({ navigation }) => {
     return (
-      <Stack.Navigator
+      <SettingStack.Navigator
         screenOptions={{
           headerStyle: { backgroundColor: colors.MATTE_BLACK },
           headerTitleStyle: {
@@ -170,7 +214,7 @@ const AppTabs = ({ provider }) => {
           },
         }}
       >
-        <Stack.Screen
+        <SettingStack.Screen
           name="Profile"
           component={ProfileScreen}
           options={{
@@ -190,7 +234,7 @@ const AppTabs = ({ provider }) => {
             ),
           }}
         />
-        <Stack.Screen
+        <SettingStack.Screen
           name="Address"
           component={AddressScreen}
           options={{
@@ -210,7 +254,7 @@ const AppTabs = ({ provider }) => {
             ),
           }}
         />
-      </Stack.Navigator>
+      </SettingStack.Navigator>
     );
   };
 
