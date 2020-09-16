@@ -1,5 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { ActivityIndicator } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+
 import api from '~/services/api';
 
 import { Background, Header, Title } from '~/components';
@@ -23,6 +25,12 @@ const ClientAppointments = () => {
     loadAppointments();
     setRefreshing(false);
   }, [refreshing]);
+
+  useFocusEffect(
+    useCallback(() => {
+      loadAppointments();
+    }, [])
+  );
 
   useEffect(() => {
     loadAppointments();

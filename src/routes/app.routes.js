@@ -15,6 +15,7 @@ import AddressScreen from '~/screens/Settings/Address';
 import SelectProviderScreen from '~/screens/New/SelectProvider';
 import SelectCourtScreen from '~/screens/New/SelectCourt';
 import SelectDateTimeScreen from '~/screens/New/SelectDateTime';
+import ConfirmScreen from '~/screens/New/Confirm';
 
 const Stack = createStackNavigator();
 const SettingStack = createStackNavigator();
@@ -142,6 +143,26 @@ const AppTabs = ({ provider }) => {
           component={SelectDateTimeScreen}
           options={{
             title: 'Selecione a Data',
+            headerLeft: () => (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.popToTop();
+                }}
+              >
+                <MaterialIcons
+                  name="chevron-left"
+                  size={24}
+                  color={colors.WHITE}
+                />
+              </TouchableOpacity>
+            ),
+          }}
+        />
+        <NewStack.Screen
+          name="Confirm"
+          component={ConfirmScreen}
+          options={{
+            title: 'Confirmar reserva',
             headerLeft: () => (
               <TouchableOpacity
                 onPress={() => {

@@ -20,6 +20,11 @@ export default function DateInput({ date, onChange }) {
       <DateButton onPress={() => setOpened(!opened)}>
         <MaterialIcons name="event" color="#FFF" size={20} />
         <DateText>{dateFormatted}</DateText>
+        {opened ? (
+          <MaterialIcons name="expand-less" color="#FFF" size={20} />
+        ) : (
+          <MaterialIcons name="expand-more" color="#FFF" size={20} />
+        )}
       </DateButton>
 
       {opened && (

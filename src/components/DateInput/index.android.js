@@ -2,8 +2,7 @@ import React, { useMemo } from 'react';
 import { DatePickerAndroid } from 'react-native';
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import { Container, DateButton, DateText } from './styles';
 
@@ -29,8 +28,9 @@ export default function DateInput({ date, onChange }) {
   return (
     <Container>
       <DateButton onPress={handleOpenPicker}>
-        <Icon name="event" color="#FFF" size={20} />
+        <MaterialIcons name="event" color="#FFF" size={20} />
         <DateText>{dateFormatted}</DateText>
+        <MaterialIcons name="expand-more" color="#FFF" size={20} />
       </DateButton>
     </Container>
   );

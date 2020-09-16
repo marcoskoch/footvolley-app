@@ -12,13 +12,13 @@ export const DateButton = styled.TouchableOpacity`
   border-radius: 4px;
   margin: 0 30px;
   flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 `;
 
 export const DateText = styled.Text`
   font-size: 14px;
   color: #fff;
-  margin-left: 15px;
 `;
 
 export const Picker = styled.View`
