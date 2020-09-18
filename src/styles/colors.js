@@ -6,4 +6,7 @@ export default {
   MATTE_GREY: '#575359',
   LIGHT_BLACK: '#3b393c',
   MATTE_BLACK: '#221f24',
+  REQUESTED: '#ebd15d',
+  CONFIRMED: '#1ba356',
+  CANCELED: '#f64c75',
 };

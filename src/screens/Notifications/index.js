@@ -110,7 +110,7 @@ const Notifications = () => {
                   <MaterialCommunityIcons
                     name="check"
                     size={28}
-                    color="#339623"
+                    color="#1ba356"
                   />
                 </TouchableOpacity>
                 <TouchableOpacity
