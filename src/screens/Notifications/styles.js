@@ -12,6 +12,7 @@ export const AppointmentListContainer = styled.ScrollView`
 export const Appointment = styled.View`
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   padding: 16px 0;
   background: ${colors.MATTE_BLACK};
   padding: 8px 16px;
@@ -25,6 +26,7 @@ export const Avatar = styled.Image`
 `;
 
 export const AppointmentDetail = styled.View`
+  flex: 1;
   padding: 0px 16px;
   justify-content: center;
 `;
@@ -48,8 +50,8 @@ export const AppointmentDate = styled.Text`
 `;
 
 export const AppointmentAction = styled.View`
-  flex: 1;
-  height: 65px;
-  align-items: flex-end;
+  width: 80px;
+  flex-direction: row;
+  align-items: center;
   justify-content: space-between;
 `;

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import axios from 'axios';
 import RNPickerSelect from 'react-native-picker-select';
-import { MaterialIcons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import colors from '~/styles/colors';
 
@@ -86,11 +86,7 @@ const Address = () => {
             />
 
             <PickerContainer>
-              <MaterialIcons
-                name="place"
-                size={20}
-                color="rgba(255, 255, 255, 0.6)"
-              />
+              <Icon name="place" size={20} color="rgba(255, 255, 255, 0.6)" />
               <Picker>
                 <RNPickerSelect
                   placeholder={placeholder}
@@ -108,7 +104,7 @@ const Address = () => {
                   }}
                   Icon={() => {
                     return (
-                      <MaterialIcons
+                      <Icon
                         name="keyboard-arrow-down"
                         size={24}
                         color="rgba(255, 255, 255, 0.6)"

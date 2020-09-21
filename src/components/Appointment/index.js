@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { parseISO, formatRelative } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import { MaterialIcons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { useAuth } from '~/contexts/auth';
 
@@ -58,7 +58,7 @@ const Appointment = ({ data, onCancel = null }) => {
 
       {data.cancelable && !user.provider && !data.canceled_at && (
         <TouchableOpacity onPress={onCancel}>
-          <MaterialIcons name="event-busy" size={24} color={colors.CANCELED} />
+          <Icon name="event-busy" size={24} color={colors.CANCELED} />
         </TouchableOpacity>
       )}
     </Container>

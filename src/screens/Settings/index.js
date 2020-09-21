@@ -1,5 +1,5 @@
 import React from 'react';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { useAuth } from '~/contexts/auth';
 
 import colors from '~/styles/colors';
@@ -42,15 +42,11 @@ const Settings = ({ navigation }) => {
                   navigation.navigate('Setting', { screen: item.screen })
                 }
               >
-                <MaterialCommunityIcons
-                  name={item.icon}
-                  size={28}
-                  color={colors.LIGHT_GREY}
-                />
+                <Icon name={item.icon} size={28} color={colors.LIGHT_GREY} />
 
                 <ListItem last={index + 1 === menus.length}>
                   <ItemTitle>{item.menu}</ItemTitle>
-                  <MaterialCommunityIcons
+                  <Icon
                     name="chevron-right"
                     size={22}
                     color={colors.LIGHT_GREY}

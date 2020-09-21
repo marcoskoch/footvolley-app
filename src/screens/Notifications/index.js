@@ -4,7 +4,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { parseISO, formatRelative } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
@@ -23,12 +23,6 @@ import {
   AppointmentAction,
 } from './styles';
 import colors from '~/styles/colors';
-
-function wait(timeout) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, timeout);
-  });
-}
 
 const Notifications = () => {
   const [refreshing, setRefreshing] = useState(false);
@@ -104,25 +98,17 @@ const Notifications = () => {
               <AppointmentAction>
                 <TouchableOpacity
                   onPress={() => {
-                    handleConfirm(item.id, 3);
-                  }}
-                >
-                  <MaterialCommunityIcons
-                    name="check"
-                    size={28}
-                    color="#1ba356"
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => {
                     handleConfirm(item.id, 2);
                   }}
                 >
-                  <MaterialCommunityIcons
-                    name="close"
-                    size={28}
-                    color="#bd3028"
-                  />
+                  <Icon name="close" size={28} color={colors.CANCELED} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    handleConfirm(item.id, 3);
+                  }}
+                >
+                  <Icon name="check" size={28} color={colors.CONFIRMED} />
                 </TouchableOpacity>
               </AppointmentAction>
             </Appointment>

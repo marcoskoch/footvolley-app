@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'react-native';
-import { AuthProvider } from '~/contexts/auth';
+import { AuthProvider } from './contexts/auth';
 
-import Routes from '~/routes';
+import Routes from './routes';
 
 import './config/ReactotronConfig';
 

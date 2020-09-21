@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialIcons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import colors from '~/styles/colors';
 
@@ -24,23 +24,18 @@ const Tab = createBottomTabNavigator();
 
 const icons = {
   ProviderAppointments: {
-    lib: MaterialIcons,
     name: 'home',
   },
   ClientAppointments: {
-    lib: MaterialIcons,
     name: 'home',
   },
   Notifications: {
-    lib: MaterialIcons,
     name: 'notifications',
   },
   Settings: {
-    lib: MaterialIcons,
     name: 'settings',
   },
   New: {
-    lib: MaterialIcons,
     name: 'add-circle-outline',
   },
 };
@@ -50,7 +45,7 @@ const AppTabs = ({ provider }) => {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
-          const { lib: Icon, name } = icons[route.name];
+          const { name } = icons[route.name];
           return <Icon name={name} size={size} color={color} />;
         },
       })}
@@ -109,11 +104,7 @@ const AppTabs = ({ provider }) => {
                   navigation.navigate('ClientAppointments');
                 }}
               >
-                <MaterialIcons
-                  name="chevron-left"
-                  size={24}
-                  color={colors.WHITE}
-                />
+                <Icon name="chevron-left" size={24} color={colors.WHITE} />
               </TouchableOpacity>
             ),
           }}
@@ -129,11 +120,7 @@ const AppTabs = ({ provider }) => {
                   navigation.popToTop();
                 }}
               >
-                <MaterialIcons
-                  name="chevron-left"
-                  size={24}
-                  color={colors.WHITE}
-                />
+                <Icon name="chevron-left" size={24} color={colors.WHITE} />
               </TouchableOpacity>
             ),
           }}
@@ -149,11 +136,7 @@ const AppTabs = ({ provider }) => {
                   navigation.popToTop();
                 }}
               >
-                <MaterialIcons
-                  name="chevron-left"
-                  size={24}
-                  color={colors.WHITE}
-                />
+                <Icon name="chevron-left" size={24} color={colors.WHITE} />
               </TouchableOpacity>
             ),
           }}
@@ -169,11 +152,7 @@ const AppTabs = ({ provider }) => {
                   navigation.popToTop();
                 }}
               >
-                <MaterialIcons
-                  name="chevron-left"
-                  size={24}
-                  color={colors.WHITE}
-                />
+                <Icon name="chevron-left" size={24} color={colors.WHITE} />
               </TouchableOpacity>
             ),
           }}
@@ -186,7 +165,7 @@ const AppTabs = ({ provider }) => {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
-          const { lib: Icon, name } = icons[route.name];
+          const { name } = icons[route.name];
           return <Icon name={name} size={size} color={color} />;
         },
       })}
@@ -246,11 +225,7 @@ const AppTabs = ({ provider }) => {
                   navigation.goBack();
                 }}
               >
-                <MaterialIcons
-                  name="chevron-left"
-                  size={24}
-                  color={colors.WHITE}
-                />
+                <Icon name="chevron-left" size={24} color={colors.WHITE} />
               </TouchableOpacity>
             ),
           }}
@@ -266,11 +241,7 @@ const AppTabs = ({ provider }) => {
                   navigation.goBack();
                 }}
               >
-                <MaterialIcons
-                  name="chevron-left"
-                  size={24}
-                  color={colors.WHITE}
-                />
+                <Icon name="chevron-left" size={24} color={colors.WHITE} />
               </TouchableOpacity>
             ),
           }}
