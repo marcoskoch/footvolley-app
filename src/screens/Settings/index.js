@@ -14,14 +14,22 @@ import {
   ButtonContainer,
 } from './styles';
 
-const menus = [
-  { id: 1, menu: 'Perfil', icon: 'account-edit', screen: 'Profile' },
-  { id: 2, menu: 'Endereço', icon: 'map-marker', screen: 'Address' },
-  { id: 3, menu: 'Cadastrar quadra', icon: 'plus-circle', screen: 'Court' },
-];
-
 const Settings = ({ navigation }) => {
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
+
+  let menus = [];
+
+  if (user.provider) {
+    menus = [
+      { id: 1, menu: 'Perfil', icon: 'account-edit', screen: 'Profile' },
+      { id: 2, menu: 'Endereço', icon: 'map-marker', screen: 'Address' },
+      { id: 3, menu: 'Cadastrar quadra', icon: 'plus-circle', screen: 'Court' },
+    ];
+  } else {
+    menus = [
+      { id: 1, menu: 'Perfil', icon: 'account-edit', screen: 'Profile' },
+    ];
+  }
 
   const handleLogout = () => {
     signOut();

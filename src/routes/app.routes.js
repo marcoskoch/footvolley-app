@@ -12,6 +12,7 @@ import NotificationsScreen from '~/screens/Notifications';
 import SettingsScreen from '~/screens/Settings';
 import ProfileScreen from '~/screens/Profile';
 import AddressScreen from '~/screens/Settings/Address';
+import CourtScreen from '~/screens/Settings/Court';
 import SelectProviderScreen from '~/screens/New/SelectProvider';
 import SelectCourtScreen from '~/screens/New/SelectCourt';
 import SelectDateTimeScreen from '~/screens/New/SelectDateTime';
@@ -235,6 +236,22 @@ const AppTabs = ({ provider }) => {
           component={AddressScreen}
           options={{
             title: 'Endereço',
+            headerLeft: () => (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              >
+                <Icon name="chevron-left" size={24} color={colors.WHITE} />
+              </TouchableOpacity>
+            ),
+          }}
+        />
+        <SettingStack.Screen
+          name="Court"
+          component={CourtScreen}
+          options={{
+            title: 'Cadastro de quadra',
             headerLeft: () => (
               <TouchableOpacity
                 onPress={() => {

@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useAuth } from '~/contexts/auth';
+import api from '~/services/api';
 
 import logo from '~/assets/arena.jpg';
 import colors from '~/styles/colors';
@@ -12,37 +13,64 @@ import {
   SubmitButton,
   AvatarContainer,
   Avatar,
+  AvatarButtonText,
   FormContainer,
+  Separator,
 } from './styles';
 
 const Profile = () => {
   const { user } = useAuth();
 
   const emailRef = useRef();
+  const oldPasswordRef = useRef();
   const passwordRef = useRef();
   const confimPasswordRef = useRef();
 
+  const [file, setFile] = useState('');
+  const [preview, setPreview] = useState('');
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [oldPassword, setOldPassword] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const loading = false;
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    await api.put('users', {
+      name,
+      email,
+      ...(oldPassword ? {oldPassword,
+        password,
+        confirmPassword} : {}),
+    });
+
     console.log('asdf');
   };
 
   useEffect(() => {
+    setFile(user?.avatar?.id);
+    setPreview(user?.avatar?.url);
     setName(user.name);
     setEmail(user.email);
+    setOldPassword('');
+    setPassword('');
+    setConfirmPassword('');
   }, [user]);
 
   return (
     <Background>
       <Container>
         <AvatarContainer>
-          <Avatar source={logo} />
+          <Avatar
+            source={{
+              uri:
+                preview ||
+                `https://api.adorable.io/avatar/150/${user.name}.png`,
+            }}
+          />
+          <AvatarButtonText>Alterar foto</AvatarButtonText>
         </AvatarContainer>
         <FormContainer
           contentContainerStyle={{ backgroundColor: colors.BACKGROUND }}
@@ -72,14 +100,16 @@ const Profile = () => {
               onChangeText={setEmail}
             />
 
+            <Separator />
+
             <FormInput
               icon="lock-outline"
               secureTextEntry
               placeholder="Senha atual"
-              ref={passwordRef}
+              ref={oldPasswordRef}
               returnKeyType="next"
-              value={password}
-              onChangeText={setPassword}
+              value={oldPassword}
+              onChangeText={setOldPassword}
             />
 
             <FormInput
