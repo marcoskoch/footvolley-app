@@ -70,7 +70,7 @@ const Profile = () => {
                 `https://api.adorable.io/avatar/150/${user.name}.png`,
             }}
           />
-          <AvatarButtonText>Alterar foto</AvatarButtonText>
+          {/* <AvatarButtonText>Alterar foto</AvatarButtonText> */}
         </AvatarContainer>
         <FormContainer
           contentContainerStyle={{ backgroundColor: colors.BACKGROUND }}

@@ -31,6 +31,7 @@ export default function DateInput({ date, onChange }) {
           <DateTimePicker
             value={date}
             onChange={onChange}
+            textColor="#fff"
             minimumDate={new Date()}
             minuteInterval={60}
             locale="pt"

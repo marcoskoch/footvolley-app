@@ -22,7 +22,7 @@ const Settings = ({ navigation }) => {
   if (user.provider) {
     menus = [
       { id: 1, menu: 'Perfil', icon: 'account-edit', screen: 'Profile' },
-      { id: 2, menu: 'Endereço', icon: 'map-marker', screen: 'Address' },
+      // { id: 2, menu: 'Endereço', icon: 'map-marker', screen: 'Address' },
       { id: 3, menu: 'Cadastrar quadra', icon: 'plus-circle', screen: 'Court' },
     ];
   } else {
