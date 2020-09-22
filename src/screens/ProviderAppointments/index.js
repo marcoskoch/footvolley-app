@@ -1,5 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { ActivityIndicator } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
+
 import api from '~/services/api';
 
 import { Background, Header, Title } from '~/components';
@@ -24,6 +26,12 @@ const ProviderAppointments = () => {
     setRefreshing(false);
   }, [refreshing]);
 
+  useFocusEffect(
+    useCallback(() => {
+      loadAppointments();
+    }, [])
+  );
+
   useEffect(() => {
     loadAppointments();
   }, []);
@@ -41,7 +49,7 @@ const ProviderAppointments = () => {
           data={appointments}
           refreshing={refreshing}
           onRefresh={onRefresh}
-          keyExtractor={(item) => String(item.id)}
+          keyExtractor={item => String(item.id)}
           renderItem={({ item }) => <Appointment data={item} />}
         />
       </Container>

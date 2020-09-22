@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { Image, Switch } from 'react-native';
 
+import { useAuth } from '~/contexts/auth';
+
 import logo from '~/assets/logo.png';
 
 import { Background } from '~/components';
@@ -17,6 +19,8 @@ import {
 } from './styles';
 
 const SignUp = ({ navigation }) => {
+  const { signUp, loading } = useAuth();
+
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -25,10 +29,15 @@ const SignUp = ({ navigation }) => {
   const [password, setPassword] = useState('');
   const [isProvider, setIsProvider] = useState(false);
 
-  const loading = false;
-
   const handleSubmit = () => {
-    console.log('handleSubmit');
+    signUp({
+      name,
+      email,
+      password,
+      provider: isProvider,
+    });
+
+    navigation.goBack();
   };
 
   const handleIsProvider = () => {

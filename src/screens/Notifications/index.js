@@ -35,18 +35,7 @@ const Notifications = () => {
   };
 
   const handleConfirm = async (id, status) => {
-    const response = await api.put(`appointments/${id}?status=${status}`);
-
-    setAppointments(
-      appointments.map((appointment) =>
-        appointment.id === id
-          ? {
-              ...appointment,
-              status: response.data.status,
-            }
-          : appointment
-      )
-    );
+    await api.put(`appointments/${id}?status=${status}`);
 
     await loadAppointments();
   };
@@ -76,7 +65,7 @@ const Notifications = () => {
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
         >
-          {appointments.map((item) => (
+          {appointments.map(item => (
             <Appointment key={item.id}>
               <Avatar
                 source={{

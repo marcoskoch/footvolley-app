@@ -30,7 +30,7 @@ const Appointment = ({ data, onCancel = null }) => {
     const today =  new Date()
 
     if (differenceInDays(parseISO(data.date), new Date()) > 6 ) {
-      return format(parseISO(data.date), "HH:mm 'horas' - dd/MM/yyyy", { locale: pt })
+      return format(parseISO(data.date), "dd/MM/yyyy 'às' HH:mm 'horas'", { locale: pt })
     }
 
     return formatRelative(parseISO(data.date), new Date(), {

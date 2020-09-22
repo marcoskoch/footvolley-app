@@ -53,6 +53,19 @@ const AuthProvider = ({ children }) => {
     await AsyncStorage.setItem('@RNAuth:token', response.token);
   }
 
+  async function signUp(payload) {
+    setLoading(true);
+    const response = await auth.signUp(payload);
+    setLoading(false);
+
+    if (response.message) {
+      Alert.alert(
+        'Falha na autenticação',
+        'Houve um erro no login, verifique seus dados'
+      );
+    }
+  }
+
   async function signOut() {
     await AsyncStorage.clear();
     setUser(null);
@@ -67,6 +80,7 @@ const AuthProvider = ({ children }) => {
         loading,
         signIn,
         signOut,
+        signUp,
       }}
     >
       {children}
