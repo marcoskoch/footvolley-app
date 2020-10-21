@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import api from '~/services/api';
 import * as auth from '~/services/auth';
+import * as userService from '~/services/user';
 
 const INITIAL_STATE = {
   user: null,
@@ -71,6 +72,25 @@ const AuthProvider = ({ children }) => {
     setUser(null);
   }
 
+  async function updateUser(payload) {
+    setLoading(true);
+    const response = await userService.update(payload);
+    setLoading(false);
+
+    if (response.message) {
+      Alert.alert(
+        'Falha na atualização do usuário',
+        'Houve um erro ao salvar, verifique seus dados'
+      );
+
+      return;
+    }
+
+    setUser(response.user);
+
+    await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response.user));
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -81,6 +101,7 @@ const AuthProvider = ({ children }) => {
         signIn,
         signOut,
         signUp,
+        updateUser,
       }}
     >
       {children}

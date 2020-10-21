@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { ActivityIndicator } from 'react-native';
+import { ActivityIndicator, Alert } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 
 import api from '~/services/api';
@@ -36,26 +36,42 @@ const ClientAppointments = () => {
     loadAppointments();
   }, []);
 
-  const handleCancel = async (id) => {
-    const response = await api.delete(`appointments/${id}`);
+  const handleCancel = async id => {
+    Alert.alert(
+      'Deseja cancelar seu agendamento?',
+      'Ao clicar em OK seu agendamento será cancelado.',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: async () => {
+            const response = await api.delete(`appointments/${id}`);
 
-    setAppointments(
-      appointments.map((appointment) =>
-        appointment.id === id
-          ? {
-              ...appointment,
-              canceled_at: response.data.canceled_at,
-              status: response.data.status,
-            }
-          : appointment
-      )
+            setAppointments(
+              appointments.map(appointment =>
+                appointment.id === id
+                  ? {
+                      ...appointment,
+                      canceled_at: response.data.canceled_at,
+                      status: response.data.status,
+                    }
+                  : appointment
+              )
+            );
+          },
+        },
+      ],
+      { cancelable: false }
     );
   };
 
   return (
     <Background>
       <Header>
-        <Title style={{ color: colors.WHITE }}>Agendamentos</Title>
+        <Title>Agendamentos</Title>
       </Header>
       <Container>
         {refreshing && (
@@ -65,7 +81,7 @@ const ClientAppointments = () => {
           data={appointments}
           refreshing={refreshing}
           onRefresh={onRefresh}
-          keyExtractor={(item) => String(item.id)}
+          keyExtractor={item => String(item.id)}
           renderItem={({ item }) => (
             <Appointment onCancel={() => handleCancel(item.id)} data={item} />
           )}

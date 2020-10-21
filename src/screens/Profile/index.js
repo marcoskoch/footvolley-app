@@ -19,7 +19,7 @@ import {
 } from './styles';
 
 const Profile = () => {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
 
   const emailRef = useRef();
   const oldPasswordRef = useRef();
@@ -38,15 +38,13 @@ const Profile = () => {
   const loading = false;
 
   const handleSubmit = async () => {
-    await api.put('users', {
+    await updateUser({
       name,
       email,
       ...(oldPassword ? {oldPassword,
         password,
         confirmPassword} : {}),
-    });
-
-    console.log('asdf');
+    })
   };
 
   useEffect(() => {
