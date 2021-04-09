@@ -32,7 +32,7 @@ const SelectDateTime = ({ route, navigation }) => {
     loadAvailable();
   }, [date, court.id]);
 
-  const handleSelectHour = (time) => {
+  const handleSelectHour = time => {
     navigation.navigate('New', {
       screen: 'Confirm',
       params: { court, time, provider },
@@ -46,7 +46,7 @@ const SelectDateTime = ({ route, navigation }) => {
 
         <HourList
           data={hours}
-          keyExtractor={(item) => item.time}
+          keyExtractor={item => item.time}
           renderItem={({ item }) => (
             <Hour
               onPress={() => handleSelectHour(item.value)}

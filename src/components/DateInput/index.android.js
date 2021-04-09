@@ -1,37 +1,50 @@
-import React, { useMemo } from 'react';
-import { DatePickerAndroid } from 'react-native';
+import React, { useState, useMemo } from 'react';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import { MaterialIcons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import { Container, DateButton, DateText } from './styles';
+import { Container, DateButton, DateText, Picker } from './styles';
 
 export default function DateInput({ date, onChange }) {
+  const [opened, setOpened] = useState(false);
+
   const dateFormatted = useMemo(
     () => format(date, "dd 'de' MMMM 'de' yyyy", { locale: pt }),
     [date]
   );
 
-  async function handleOpenPicker() {
-    const { action, year, month, day } = await DatePickerAndroid.open({
-      mode: 'spinner',
-      date,
-    });
+  const selectDate = (event, selectedDate) => {
+    setOpened(false);
 
-    if (action === DatePickerAndroid.dateSetAction) {
-      const selectedDate = new Date(year, month, day);
-
-      onChange(selectedDate);
-    }
-  }
+    onChange(event, selectedDate);
+  };
 
   return (
     <Container>
-      <DateButton onPress={handleOpenPicker}>
-        <MaterialIcons name="event" color="#FFF" size={20} />
+      <DateButton onPress={() => setOpened(!opened)}>
+        <Icon name="event" color="#FFF" size={20} />
         <DateText>{dateFormatted}</DateText>
-        <MaterialIcons name="expand-more" color="#FFF" size={20} />
+        {opened ? (
+          <Icon name="expand-less" color="#FFF" size={20} />
+        ) : (
+          <Icon name="expand-more" color="#FFF" size={20} />
+        )}
       </DateButton>
+
+      {opened && (
+        <Picker>
+          <DateTimePicker
+            value={date}
+            onChange={selectDate}
+            textColor="#fff"
+            minimumDate={new Date()}
+            minuteInterval={60}
+            locale="pt"
+            mode="date"
+          />
+        </Picker>
+      )}
     </Container>
   );
 }

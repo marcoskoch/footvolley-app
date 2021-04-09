@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { parseISO, formatRelative } from 'date-fns';
+import { parseISO, formatRelative, differenceInDays, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import { MaterialIcons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { useAuth } from '~/contexts/auth';
 
@@ -27,6 +27,12 @@ const statusMap = {
 const Appointment = ({ data, onCancel = null }) => {
   const { user } = useAuth();
   const dateParsed = useMemo(() => {
+    const today =  new Date()
+
+    if (differenceInDays(parseISO(data.date), new Date()) > 6 ) {
+      return format(parseISO(data.date), "dd/MM/yyyy 'às' HH:mm 'horas'", { locale: pt })
+    }
+
     return formatRelative(parseISO(data.date), new Date(), {
       locale: pt,
       addSuffix: true,
@@ -37,13 +43,17 @@ const Appointment = ({ data, onCancel = null }) => {
     ? data?.user?.avatar?.url
     : data?.court?.provider?.avatar?.url;
 
+    const name = user.provider
+    ? data?.user?.name
+    : data?.court?.provider?.name
+
   return (
     <Container key={data.id}>
       <Avatar
         source={{
           uri:
             avatarUri ||
-            `https://api.adorable.io/avatar/50/${data.user.name}.png`,
+            `https://api.adorable.io/avatar/50/${name}.png`,
         }}
       />
 
@@ -58,7 +68,7 @@ const Appointment = ({ data, onCancel = null }) => {
 
       {data.cancelable && !user.provider && !data.canceled_at && (
         <TouchableOpacity onPress={onCancel}>
-          <MaterialIcons name="event-busy" size={24} color={colors.CANCELED} />
+          <Icon name="event-busy" size={24} color={colors.CANCELED} />
         </TouchableOpacity>
       )}
     </Container>

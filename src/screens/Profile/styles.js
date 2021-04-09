@@ -1,6 +1,8 @@
 import { Platform } from 'react-native';
 import styled from 'styled-components/native';
 
+import colors from '~/styles/colors';
+
 import Input from '~/components/Input';
 import Button from '~/components/Button';
 
@@ -20,6 +22,12 @@ export const Avatar = styled.Image`
   border-radius: 75px;
 `;
 
+export const AvatarButtonText = styled.Text`
+  margin-top: 16px;
+  font-weight: bold;
+  color: ${colors.PRIMARY};
+`;
+
 export const FormContainer = styled.KeyboardAvoidingView.attrs({
   enabled: Platform.OS === 'ios',
   behavior: 'position',
@@ -31,7 +39,13 @@ export const FormContainer = styled.KeyboardAvoidingView.attrs({
 
 export const Form = styled.View`
   align-self: stretch;
-  margin-top: 50px;
+  margin-top: 16px;
+`;
+
+export const Separator = styled.View`
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 20px 0 30px;
 `;
 
 export const FormInput = styled(Input)`

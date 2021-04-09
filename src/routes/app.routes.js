@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { MaterialIcons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import colors from '~/styles/colors';
 
@@ -12,6 +12,7 @@ import NotificationsScreen from '~/screens/Notifications';
 import SettingsScreen from '~/screens/Settings';
 import ProfileScreen from '~/screens/Profile';
 import AddressScreen from '~/screens/Settings/Address';
+import CourtScreen from '~/screens/Settings/Court';
 import SelectProviderScreen from '~/screens/New/SelectProvider';
 import SelectCourtScreen from '~/screens/New/SelectCourt';
 import SelectDateTimeScreen from '~/screens/New/SelectDateTime';
@@ -24,23 +25,18 @@ const Tab = createBottomTabNavigator();
 
 const icons = {
   ProviderAppointments: {
-    lib: MaterialIcons,
     name: 'home',
   },
   ClientAppointments: {
-    lib: MaterialIcons,
     name: 'home',
   },
   Notifications: {
-    lib: MaterialIcons,
     name: 'notifications',
   },
   Settings: {
-    lib: MaterialIcons,
     name: 'settings',
   },
   New: {
-    lib: MaterialIcons,
     name: 'add-circle-outline',
   },
 };
@@ -50,7 +46,7 @@ const AppTabs = ({ provider }) => {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
-          const { lib: Icon, name } = icons[route.name];
+          const { name } = icons[route.name];
           return <Icon name={name} size={size} color={color} />;
         },
       })}
@@ -109,11 +105,7 @@ const AppTabs = ({ provider }) => {
                   navigation.navigate('ClientAppointments');
                 }}
               >
-                <MaterialIcons
-                  name="chevron-left"
-                  size={24}
-                  color={colors.WHITE}
-                />
+                <Icon name="chevron-left" size={24} color={colors.WHITE} />
               </TouchableOpacity>
             ),
           }}
@@ -129,11 +121,7 @@ const AppTabs = ({ provider }) => {
                   navigation.popToTop();
                 }}
               >
-                <MaterialIcons
-                  name="chevron-left"
-                  size={24}
-                  color={colors.WHITE}
-                />
+                <Icon name="chevron-left" size={24} color={colors.WHITE} />
               </TouchableOpacity>
             ),
           }}
@@ -149,11 +137,7 @@ const AppTabs = ({ provider }) => {
                   navigation.popToTop();
                 }}
               >
-                <MaterialIcons
-                  name="chevron-left"
-                  size={24}
-                  color={colors.WHITE}
-                />
+                <Icon name="chevron-left" size={24} color={colors.WHITE} />
               </TouchableOpacity>
             ),
           }}
@@ -169,11 +153,7 @@ const AppTabs = ({ provider }) => {
                   navigation.popToTop();
                 }}
               >
-                <MaterialIcons
-                  name="chevron-left"
-                  size={24}
-                  color={colors.WHITE}
-                />
+                <Icon name="chevron-left" size={24} color={colors.WHITE} />
               </TouchableOpacity>
             ),
           }}
@@ -186,7 +166,7 @@ const AppTabs = ({ provider }) => {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
-          const { lib: Icon, name } = icons[route.name];
+          const { name } = icons[route.name];
           return <Icon name={name} size={size} color={color} />;
         },
       })}
@@ -246,11 +226,7 @@ const AppTabs = ({ provider }) => {
                   navigation.goBack();
                 }}
               >
-                <MaterialIcons
-                  name="chevron-left"
-                  size={24}
-                  color={colors.WHITE}
-                />
+                <Icon name="chevron-left" size={24} color={colors.WHITE} />
               </TouchableOpacity>
             ),
           }}
@@ -266,11 +242,23 @@ const AppTabs = ({ provider }) => {
                   navigation.goBack();
                 }}
               >
-                <MaterialIcons
-                  name="chevron-left"
-                  size={24}
-                  color={colors.WHITE}
-                />
+                <Icon name="chevron-left" size={24} color={colors.WHITE} />
+              </TouchableOpacity>
+            ),
+          }}
+        />
+        <SettingStack.Screen
+          name="Court"
+          component={CourtScreen}
+          options={{
+            title: 'Cadastro de quadra',
+            headerLeft: () => (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.goBack();
+                }}
+              >
+                <Icon name="chevron-left" size={24} color={colors.WHITE} />
               </TouchableOpacity>
             ),
           }}

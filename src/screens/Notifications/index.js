@@ -4,7 +4,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { parseISO, formatRelative } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 
@@ -24,12 +24,6 @@ import {
 } from './styles';
 import colors from '~/styles/colors';
 
-function wait(timeout) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, timeout);
-  });
-}
-
 const Notifications = () => {
   const [refreshing, setRefreshing] = useState(false);
   const [appointments, setAppointments] = useState([]);
@@ -41,18 +35,7 @@ const Notifications = () => {
   };
 
   const handleConfirm = async (id, status) => {
-    const response = await api.put(`appointments/${id}?status=${status}`);
-
-    setAppointments(
-      appointments.map((appointment) =>
-        appointment.id === id
-          ? {
-              ...appointment,
-              status: response.data.status,
-            }
-          : appointment
-      )
-    );
+    await api.put(`appointments/${id}?status=${status}`);
 
     await loadAppointments();
   };
@@ -82,7 +65,7 @@ const Notifications = () => {
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
         >
-          {appointments.map((item) => (
+          {appointments.map(item => (
             <Appointment key={item.id}>
               <Avatar
                 source={{
@@ -104,25 +87,17 @@ const Notifications = () => {
               <AppointmentAction>
                 <TouchableOpacity
                   onPress={() => {
-                    handleConfirm(item.id, 3);
-                  }}
-                >
-                  <MaterialCommunityIcons
-                    name="check"
-                    size={28}
-                    color="#1ba356"
-                  />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => {
                     handleConfirm(item.id, 2);
                   }}
                 >
-                  <MaterialCommunityIcons
-                    name="close"
-                    size={28}
-                    color="#bd3028"
-                  />
+                  <Icon name="close" size={28} color={colors.CANCELED} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    handleConfirm(item.id, 3);
+                  }}
+                >
+                  <Icon name="check" size={28} color={colors.CONFIRMED} />
                 </TouchableOpacity>
               </AppointmentAction>
             </Appointment>

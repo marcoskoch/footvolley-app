@@ -1,7 +1,10 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-import { AsyncStorage, Alert } from 'react-native';
+import { Alert } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+
 import api from '~/services/api';
 import * as auth from '~/services/auth';
+import * as userService from '~/services/user';
 
 const INITIAL_STATE = {
   user: null,
@@ -51,9 +54,41 @@ const AuthProvider = ({ children }) => {
     await AsyncStorage.setItem('@RNAuth:token', response.token);
   }
 
+  async function signUp(payload) {
+    setLoading(true);
+    const response = await auth.signUp(payload);
+    setLoading(false);
+
+    if (response.message) {
+      Alert.alert(
+        'Falha na autenticação',
+        'Houve um erro no login, verifique seus dados'
+      );
+    }
+  }
+
   async function signOut() {
     await AsyncStorage.clear();
     setUser(null);
+  }
+
+  async function updateUser(payload) {
+    setLoading(true);
+    const response = await userService.update(payload);
+    setLoading(false);
+
+    if (response.message) {
+      Alert.alert(
+        'Falha na atualização do usuário',
+        'Houve um erro ao salvar, verifique seus dados'
+      );
+
+      return;
+    }
+
+    setUser(response.user);
+
+    await AsyncStorage.setItem('@RNAuth:user', JSON.stringify(response.user));
   }
 
   return (
@@ -65,6 +100,8 @@ const AuthProvider = ({ children }) => {
         loading,
         signIn,
         signOut,
+        signUp,
+        updateUser,
       }}
     >
       {children}

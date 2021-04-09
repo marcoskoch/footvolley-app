@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import { formatRelative, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
-import { StackActions } from '@react-navigation/native';
 
 import api from '~/services/api';
 
